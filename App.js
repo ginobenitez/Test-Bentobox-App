@@ -10,13 +10,13 @@ export default function App() {
       <Text style={styles.text}>Login: </Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter Username"
+        placeholder="Username*"
         
       />
       <Text style={styles.text}>Password: </Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter password"
+        placeholder="Password*"
         type="password"
         
       />
@@ -24,10 +24,10 @@ export default function App() {
       <Pressable
         style = {styles.submitButton}
       >
-        <Text style={styles.text}>Submit</Text>
+        <Text style={styles.text}>Login</Text>
       </Pressable>
       
-      <Text style={styles.text}> Hi!</Text>
+      
       <StatusBar style="auto" />
     </View>
   );
