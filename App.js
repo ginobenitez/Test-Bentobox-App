@@ -1,33 +1,31 @@
+import React from 'react';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, Image, Pressable } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Image 
-      style={styles.image}
-      source={require('./assets/BB Logo Icon_COLOR.png')}/>
-      <Text style={styles.text}>Login: </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username*"
-        
-      />
-      <Text style={styles.text}>Password: </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Password*"
-        type="password"
-        
-      />
-      
+        style={styles.image}
+        source={require('./assets/BB Logo Icon_COLOR.png')}/>
       <Pressable
-        style = {styles.submitButton}
+        style={styles.button}
+        onPress={() => {
+          // Handle sign in action
+          console.log("Sign in button pressed");
+        }}
       >
-        <Text style={styles.text}>Login</Text>
+        <Text style={styles.buttonText}>Sign In</Text>
       </Pressable>
-      
-      
+      <Pressable
+        style={[styles.button, { backgroundColor: '#3077b2' }]}
+        onPress={() => {
+          // Handle sign up action
+          console.log("Sign up button pressed");
+        }}
+      >
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </Pressable>
       <StatusBar style="auto" />
     </View>
   );
@@ -40,33 +38,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 2,
-    width: 200,
-    padding: 10,
-    borderRadius: 15,
-    backgroundColor:"#ffffff",
-    borderColor:'#3077b2'
-  },
   image: {
     width: 105,
     height: 110,
-    margin:20,
-    marginLeft: 25
+    marginBottom: 50,
   },
-
-  submitButton: {
+  button: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 50,
+    width: 200,
+    height: 50,
     borderRadius: 25,
-    elevation: 3, 
-    backgroundColor: '#3077b2',
+    backgroundColor: '#fff',
+    marginBottom: 20,
   },
-  text:{
-    color:'white'
-  }
+  buttonText: {
+    color: '#111920',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
