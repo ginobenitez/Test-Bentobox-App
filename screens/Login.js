@@ -6,7 +6,7 @@ export default function App() {
     <View style={styles.container}>
       <Image 
       style={styles.image}
-      source={require('./assets/BB Logo Icon_COLOR.png')}/>
+      source={require('./assets/logo.png')}/>
       <Text style={styles.text}>Login: </Text>
       <TextInput
         style={styles.input}
