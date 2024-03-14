@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, Pressable, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { doSignUp } from '../api/doSignUp';
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -22,18 +23,13 @@ export default function SignUp() {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ first: firstName, last: lastName, login: username, email, password })
-      });
+      const { success, error, data } = await doSignUp(firstName, lastName, username, email, password);
 
-      if (response.ok) {
+      if (success) {
         Alert.alert('Registration successful');
         // Navigate to login screen or perform any other action
       } else {
-        const data = await response.json();
-        Alert.alert('Registration failed', data.error);
+        Alert.alert('Registration failed', error);
       }
     } catch (error) {
       console.error(error);
