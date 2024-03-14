@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Image, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-export default function App() {
+export default function SignUp() {
   return (
     <View style={styles.container}>
       <Image 
         style={styles.image}
-        source={require('./assets/BB_Logo_Icon_COLOR.png')}
+        //source={require('../assets/BB_Logo_Icon_COLOR.png')}
       />
       <Text style={styles.text}>Sign Up</Text>
 
