@@ -8,7 +8,7 @@ class SearchResults extends PureComponent {
 
         return (
             <View>
-                <FlatList
+                <View
                     keyExtractor={(item) => item.mal_id.toString()} // Use toString() to ensure key is a string
                     data={searchList} // Use searchList from props
                     numColumns={2}

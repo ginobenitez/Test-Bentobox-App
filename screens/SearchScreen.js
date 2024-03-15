@@ -19,7 +19,7 @@ const SearchScreen = () => {
     const getSearched = async (searchedItem) => {
         try {
             if(searchedItem !== ''){
-                const search = 'https://api.jikan.moe/v4/anime?sfw?order_by=popularity&sort=desc&q='+searchedItem;
+                const search = 'https://api.jikan.moe/v4/anime?sfw&order_by=popularity&sort=desc&q='+searchedItem;
                 console.log(search);
                 const response = await fetch(search);
                 if (!response.ok) {
@@ -40,7 +40,7 @@ const SearchScreen = () => {
 
     useEffect(() => {
         getSearched(searchedItem);
-    }, []);
+    }, [searchedItem]);
 
     console.log('Searched item:', searchedItem);
     console.log(searchList.length);
