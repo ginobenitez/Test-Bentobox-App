@@ -11,9 +11,11 @@ export default class AnimeListing extends PureComponent {
         const { anime } = this.props;
         return (
             <View style={styles.card} key={anime.mal_id}>
-                <Pressable>
-                    <Image style={styles.animeImages} source={{ uri: anime.images.jpg.image_url }} />
-                </Pressable>
+            <Pressable>
+               <Image style={styles.animeImages} source={{ uri: anime.images.jpg.image_url }} />
+           </Pressable> 
+            
+                
             </View>
         );
     }
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     },
     animeImages: {
         width: windowWidth / 2.2,
-        height: windowHeight / 3,
+        height: windowHeight / 2.5,
         alignSelf: 'center'
     },
     card: {

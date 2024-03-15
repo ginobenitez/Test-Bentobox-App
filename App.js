@@ -7,6 +7,7 @@ import StartScreen from "./screens/StartScreen";
 import LoginScreen from "./screens/Login";
 import SignUpScreen from "./screens/SignUp";
 import LoginStack from './Navigation/LoginStack';
+import SignUpStack from './Navigation/SignUpStack';
 
 
 function LogoTitle() {
@@ -53,7 +54,7 @@ export default function App() {
         />
         <Stack.Screen  
         name = "SignUp" 
-        component = {SignUpScreen}
+        component = {SignUpStack}
         
         options = {{
           title:"Login",

@@ -1,105 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, Image, Pressable, FlatList, ScrollView } from 'react-native';
-import React, { PureComponent } from 'react';
-import SearchHeader from '../Components/SearchHeader';
-import TopAnimeBox from '../Components/TopAnimeBox';
-import CurrentSeason from '../Components/CurrentSeason';
-import StudioGhibliList from '../Components/StudioGhibliList';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import MainDisplay from '../Components/MainDisplay';
+import SearchResults from '../Components/SearchResults';
 import { Dimensions } from 'react-native';
+import { SearchBar } from "react-native-elements"; 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-class SearchScreen extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            animeList: [],
-            topAnime: [],
-            seasonAnime: [],
-            ghibliAnime: []
-        };
-    }
+const SearchScreen = () => {
+    const [searchedItem, setSearchedItem] = useState('');
+    const [searchList, setSearchList] = useState([]);
 
-    componentDidMount() {
-        var startTime = performance.now();
-        this.getTopAnime();
-        this.getSeasonAnime();
-        this.getGhibliAnime();
-        var endTime = performance.now();
-        console.log(`Call to fetch anime took ${endTime - startTime} milliseconds`);
-    }
+    const handleInputFromSearch = (data) => {
+        setSearchedItem(data);
+    };
 
-    getTopAnime = async () => {
+    const getSearched = async (searchedItem) => {
         try {
-            const response = await fetch(`https://api.jikan.moe/v4/top/anime?filter=bypopularity&limit=25`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            if(searchedItem !== ''){
+                const search = 'https://api.jikan.moe/v4/anime?sfw?order_by=popularity&sort=desc&q='+searchedItem;
+                console.log(search);
+                const response = await fetch(search);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const temp = await response.json();
+                if (temp && temp.data) {
+                    setSearchList(temp.data.slice(0, 25));
+                } else {
+                    console.error('Data structure is not as expected:', data);
+                }
             }
-            const temp = await response.json();
-            if (temp && temp.data) {
-                this.setState({ topAnime: temp.data.slice(0, 25) });
-            } else {
-                console.error('Data structure is not as expected:', data);
-            }
+            
         } catch (error) {
-            console.error('Error fetching top anime:', error);
+            console.error('Error fetching search anime:', error);
         }
-    }
+    };
 
-    getSeasonAnime = async () => {
-        try {
-            const response = await fetch(`https://api.jikan.moe/v4/seasons/now?sfw`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const temp = await response.json();
-            if (temp && temp.data) {
-                this.setState({ seasonAnime: temp.data.slice(0, 25) });
-            } else {
-                console.error('Data structure is not as expected:', data);
-            }
-        } catch (error) {
-            console.error('Error fetching season anime:', error);
-        }
-    }
+    useEffect(() => {
+        getSearched(searchedItem);
+    }, []);
 
-    getGhibliAnime = async () => {
-        try {
-            const response = await fetch(`https://api.jikan.moe/v4/anime?producers=21`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const temp = await response.json();
-            if (temp && temp.data) {
-                this.setState({ ghibliAnime: temp.data.slice(0, 25) });
-            } else {
-                console.error('Data structure is not as expected:', data);
-            }
-        } catch (error) {
-            console.error('Error fetching ghibli anime:', error);
-        }
-    }
+    console.log('Searched item:', searchedItem);
+    console.log(searchList.length);
 
-    render() {
-        const { topAnime, seasonAnime, ghibliAnime } = this.state;
-        return (
-            <View style={styles.container}>
-                <View style={styles.box}>
-                    <Text style={styles.searchText}> Place SearchBar here</Text>
-                </View>
-                <ScrollView>
-                    <TopAnimeBox topAnime={topAnime} />
-                    <CurrentSeason seasonAnime={seasonAnime} />
-                    <StudioGhibliList ghibliAnime={ghibliAnime} />
-                    <Text>{global.userId}</Text>
-                    <Text>{global.loginName}</Text>
-                    <Text>{global.firstName}</Text>
-                </ScrollView>
-            </View>
-        );
-    }
-}
+    return (
+        <View style={styles.container}>
+            <ScrollView>
+                <SearchBar
+                     placeholder="Search Here..."
+                     lightTheme 
+                     round
+                     value={searchedItem} 
+                     onChangeText={handleInputFromSearch} 
+                     autoCorrect={false}
+                />
+                {searchedItem ? <SearchResults searchList={searchList} /> : <MainDisplay />}
+            </ScrollView>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -113,10 +74,6 @@ const styles = StyleSheet.create({
         height: 125,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    searchText: {
-        color: "#fff",
-        justifyContent: 'center'
     }
 });
 

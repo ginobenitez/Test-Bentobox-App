@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, Pressable, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { doSignUp } from '../api/doSignUp';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 
 export default function SignUp() {
+  const navigation = useNavigation()
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
@@ -22,12 +25,13 @@ export default function SignUp() {
         Alert.alert('Passwords do not match');
         return;
       }
-
+      
       const { success, error, data } = await doSignUp(firstName, lastName, username, email, password);
 
       if (success) {
         Alert.alert('Registration successful');
         // Navigate to login screen or perform any other action
+        navigation.navigate('Home');
       } else {
         Alert.alert('Registration failed', error);
       }
