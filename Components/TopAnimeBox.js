@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import React, { PureComponent } from 'react';
-import AnimeListing from './AnimeListing';
+import AnimeListing from './anime/AnimeListing';
 import { Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;

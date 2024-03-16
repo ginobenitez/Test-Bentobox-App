@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, FlatList } from 'react-native';
-import AnimeListing from './AnimeListing';
+import AnimeListing from './anime/AnimeListing';
 
 class SearchResults extends PureComponent {
     render() {
