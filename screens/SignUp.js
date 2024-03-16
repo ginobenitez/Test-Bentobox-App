@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, Pressable, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { doSignUp } from '../api/doSignUp';
+import {Dimensions} from 'react-native';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function SignUp() {
   const navigation = useNavigation()
@@ -12,19 +16,27 @@ export default function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
+  //const [confirmPassword, setConfirmPassword] = useState('');
+  /* 
+   <Text style= {styles.inputTitle}>Confirm Password</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm Password*"
+        secureTextEntry={true}
+        onChangeText={setConfirmPassword}
+      />
+*/
   const handleSignUp = async () => {
     try {
-      if (!firstName || !lastName || !username || !email || !password || !confirmPassword) {
+      if (!firstName || !lastName || !username || !email || !password) {
         Alert.alert('All fields are required');
         return;
       }
 
-      if (password !== confirmPassword) {
+      /*if (password !== confirmPassword) {
         Alert.alert('Passwords do not match');
         return;
-      }
+      }*/
       
       const { success, error, data } = await doSignUp(firstName, lastName, username, email, password);
 
@@ -43,48 +55,41 @@ export default function SignUp() {
 
   return (
     <View style={styles.container}>
-      <Image 
-        style={styles.image}
-        source={require('../assets/BB Logo Icon_COLOR.png')}
-      />
-      <Text style={styles.text}>Sign Up</Text>
 
+      <Text style= {styles.inputTitle}>First Name</Text>
       <TextInput
         style={styles.input}
         placeholder="First Name*"
         onChangeText={setFirstName}
       />
 
+      <Text style= {styles.inputTitle}>Last Name</Text>
       <TextInput
         style={styles.input}
         placeholder="Last Name*"
         onChangeText={setLastName}
       />
 
+      <Text style= {styles.inputTitle}>Username</Text>
       <TextInput
         style={styles.input}
         placeholder="Username*"
         onChangeText={setUsername}
       />
 
+      <Text style= {styles.inputTitle}>Email Address</Text>
       <TextInput
         style={styles.input}
         placeholder="Email Address*"
         onChangeText={setEmail}
       />
 
+      <Text style= {styles.inputTitle}>Password</Text>
       <TextInput
         style={styles.input}
         placeholder="Password*"
         secureTextEntry={true}
         onChangeText={setPassword}
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password*"
-        secureTextEntry={true}
-        onChangeText={setConfirmPassword}
       />
 
       <Pressable
@@ -100,14 +105,20 @@ export default function SignUp() {
 }
 
 const styles = StyleSheet.create({
+  inputTitle:{
+    color:"#fff",
+    fontSize:12,
+    fontWeight:'bold',
+    alignSelf:'flex-start'
+  },
   container: {
-    flex: 1,
-    backgroundColor: '#111920',
+    marginTop:10,
+    color: '#111920',
     alignItems: 'center',
     justifyContent: 'center',
   },
   input: {
-    height: 40,
+    height: windowHeight/19,
     marginVertical: 8,
     borderWidth: 2,
     width: 300,
@@ -129,7 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     elevation: 3, 
     backgroundColor: '#3077b2',
-    marginTop: 20,
+    marginTop: 10,
   },
   text:{
     color:'white',

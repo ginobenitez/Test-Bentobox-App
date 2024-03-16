@@ -34,10 +34,7 @@ changeLoginNameHandler = async (val) =>
   return (
     
     <View style={styles.container}>
-      <Image 
-      style={styles.image}
-      source={require('../assets/BB Logo Icon_COLOR.png')}
-      />
+
       <Text style={styles.text}>Login: </Text>
       <TextInput
         style={styles.input}
@@ -66,6 +63,7 @@ changeLoginNameHandler = async (val) =>
         
       >
         <Text style={styles.text}>Login</Text>
+
       </Pressable>
       
       
@@ -79,7 +77,7 @@ changeLoginNameHandler = async (val) =>
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginTop:10,
     backgroundColor: '#111920',
     alignItems: 'center',
     justifyContent: 'center',
