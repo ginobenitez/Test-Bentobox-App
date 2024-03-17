@@ -48,15 +48,7 @@ const SearchScreen = () => {
     return (
         <View style={styles.container}>
             <ScrollView>
-                <SearchBar
-                     placeholder="Search Here..."
-                     lightTheme 
-                     round
-                     value={searchedItem} 
-                     onChangeText={handleInputFromSearch} 
-                     autoCorrect={false}
-                />
-                {searchedItem ? <SearchResults searchList={searchList} /> : <MainDisplay />}
+                <MainDisplay />
             </ScrollView>
         </View>
     );

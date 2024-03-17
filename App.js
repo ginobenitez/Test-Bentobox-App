@@ -4,10 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StartScreen from "./screens/StartScreen";
-import LoginScreen from "./screens/Login";
-import SignUpScreen from "./screens/SignUp";
-import LoginStack from './Navigation/LoginStack';
-import SignUpStack from './Navigation/SignUpStack';
+import HomeStack from './Navigation/HomeStack';
 
 
 function LogoTitle() {
@@ -24,7 +21,7 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer
-    independent = {true}>
+    >
       <Stack.Navigator >
         <Stack.Screen 
         name="Welcome" 
@@ -39,22 +36,9 @@ export default function App() {
 
         }}
         />
-        <Stack.Screen 
-        name="Login" 
-        component = {LoginStack}
-        options = {{
-          title:"Login",
-          headerShown:false,
-          headerStyle:{
-            backgroundColor:'#111920'
-          },
-          headerTintColor: '#111920',
-
-        }}
-        />
         <Stack.Screen  
-        name = "SignUp" 
-        component = {SignUpStack}
+        name = "Home" 
+        component = {HomeStack}
         
         options = {{
           title:"Login",

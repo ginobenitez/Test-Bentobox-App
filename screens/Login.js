@@ -4,8 +4,6 @@ import * as React from 'react';
 import HomeScreen from './HomeScreen';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import HomeStack from '../Navigation/HomeStack';
-import LoginStack from '../Navigation/LoginStack';
 import {doLogin} from '../api/doLogin'
 global.loginName = '';
 global.password = '';

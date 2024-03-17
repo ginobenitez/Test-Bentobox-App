@@ -5,7 +5,6 @@ import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from "./Login";
 import SignUp from "./SignUp";
-import LoginStack from '../Navigation/LoginStack';
 import LoginSwitch from '../Components/LoginSwitch';
 import {Dimensions} from 'react-native';
 

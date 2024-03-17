@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import LoginScreen from "../screens/Login";
 import HomeScreen from '../screens/HomeScreen';
-import SearchScreen from '../screens/SearchScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SearchStack from './SearchStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,16 +12,16 @@ function HomeStack() {
       initialRouteName="Home" 
       barStyle={{ backgroundColor: '#111920' }}
       >
-        <Tab.Screen name="Home"  
+        <Tab.Screen name="Collection"  
         component={HomeScreen} 
         options={{
             headerShown:true,
             
         }}/>
          <Tab.Screen name="Discover"  
-        component={SearchScreen}
+        component={SearchStack}
         options={{
-          headerShown:true,
+          headerShown:false,
            headerTintColor:"#ffffff",
            headerStyle:{
             backgroundColor:"#111920"
