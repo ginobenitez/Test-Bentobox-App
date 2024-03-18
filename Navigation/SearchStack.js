@@ -1,19 +1,21 @@
 import * as React from 'react';
 import { StyleSheet, Button, Text, View, Image, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SearchScreen from "../screens/SearchScreen";
+import DiscoverScreen from "../screens/DiscoverScreen";
 import AnimeInfoScreen from"../screens/AnimeInfoScreen";
+import SearchScreen from '../screens/SearchScreen';
 
 const Stack = createNativeStackNavigator()
 
 export default function SearchStack() {
+  const navigation = useNavigation()
   return (
       <Stack.Navigator >
         <Stack.Screen 
         name="Discover" 
-        component = {SearchScreen}
+        component = {DiscoverScreen}
         options = {{
           title:"Discover",
           headerShown:true,
@@ -23,7 +25,7 @@ export default function SearchStack() {
           headerTintColor: '#111920',
           headerRight: () => (
             <Button
-              onPress={() => alert('This is a button!')}
+              onPress={() => navigation.navigate('Search')}
               title="Search"
               color="#fff"
             />
@@ -33,6 +35,19 @@ export default function SearchStack() {
          <Stack.Screen 
         name="Info"
         component = {AnimeInfoScreen}
+        options = {{
+          headerShown:true,
+          headerStyle:{
+            backgroundColor:'#111920',
+            headerTintColor: '#111920',
+          },
+
+
+        }}
+        />
+         <Stack.Screen 
+        name="Search"
+        component = {SearchScreen}
         options = {{
           headerShown:true,
           headerStyle:{

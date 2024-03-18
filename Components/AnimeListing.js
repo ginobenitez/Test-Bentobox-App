@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     animeImages: {
-        width: 200,
+        width: 175,
         height:300,
         alignSelf: 'center'
     },

@@ -4,14 +4,16 @@ import React, { PureComponent } from 'react';
 import TopAnimeBox from '../Components/TopAnimeBox';
 import CurrentSeason from '../Components/CurrentSeason';
 import StudioGhibliList from '../Components/StudioGhibliList';
-
+import NinetiesAnime from './NinetiesAnime';
+import { Nineties } from '../calls/jikanCalls';
 class MainDisplay extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             topAnime: [],
             seasonAnime: [],
-            ghibliAnime: []
+            ghibliAnime: [],
+            ninetiesAnime: []
         };
     }
 
@@ -20,6 +22,8 @@ class MainDisplay extends PureComponent {
         this.getTopAnime();
         this.getSeasonAnime();
         this.getGhibliAnime();
+        this.getNineties();
+
         var endTime = performance.now();
         console.log(`Call to fetch anime took ${endTime - startTime} milliseconds`);
     }
@@ -76,13 +80,30 @@ class MainDisplay extends PureComponent {
         }
     }
 
+    getNineties = async ()=> {
+        try {
+            const response = await fetch("https://api.jikan.moe/v4/anime?type=tv&start_date=1989-01-01&end_date=1999-12-31&order_by=popularity&sort=asc");
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const temp = await response.json();
+            if (temp && temp.data) {
+                this.setState({ ninetiesAnime: temp.data.slice(0, 25) });
+            } else {
+                console.error('Data structure is not as expected:', data);
+            }
+        } catch (error) {
+            console.error('Error fetching top anime:', error);
+        }
+    }
     render() {
-        const { topAnime, seasonAnime, ghibliAnime } = this.state;
+        const { topAnime, seasonAnime, ghibliAnime, ninetiesAnime } = this.state;
         return (
             <View >
                     <TopAnimeBox topAnime={topAnime} />
                     <CurrentSeason seasonAnime={seasonAnime} />
                     <StudioGhibliList ghibliAnime={ghibliAnime} />
+                    <NinetiesAnime ninetiesAnime={ninetiesAnime}/>
             </View>
         );
     }
