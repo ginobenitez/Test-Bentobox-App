@@ -3,7 +3,7 @@ import { Dimensions, ScrollView, StyleSheet, Text, View, Pressable, Image } from
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ratingFormat, formatDuration, formatPlot } from '../functions/function';
-import LinearGradient from 'react-native-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
