@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import TopAnimeBox from '../Components/TopAnimeBox';
 import CurrentSeason from '../Components/CurrentSeason';
 import StudioGhibliList from '../Components/StudioGhibliList';
-import NinetiesAnime from './ninetiesAnime';
+
 class MainDisplay extends PureComponent {
     constructor(props) {
         super(props);
@@ -96,7 +96,7 @@ class MainDisplay extends PureComponent {
         }
     }
     render() {
-        const { topAnime, seasonAnime, ghibliAnime, ninetiesAnime } = this.state;
+        const { topAnime, seasonAnime, ghibliAnime } = this.state;
         return (
             <View >
                     <TopAnimeBox topAnime={topAnime} />
