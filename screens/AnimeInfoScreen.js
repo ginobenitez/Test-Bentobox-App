@@ -1,14 +1,13 @@
 import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View, Pressable, Image } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ratingFormat, formatDuration, formatPlot } from '../functions/function';
-
+import LinearGradient from 'react-native-linear-gradient';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
+//<View style={styles.blurOverlay}>
 const AnimeInfoScreen = ({ route }) => {
     const { anime } = route.params;
     const navigation = useNavigation();
@@ -24,15 +23,24 @@ const AnimeInfoScreen = ({ route }) => {
 
     return (
         <View >
-                    <Image style={styles.imageBackground} source={{ uri: anime.images.jpg.large_image_url }} />
-                    <View style={styles.blurOverlay}>
+
+                    
                         
                     <ScrollView>
-                    <Image style={styles.poster} source={{ uri: anime.images.jpg.large_image_url }} />
+                   
+                    <Image style={styles.imageBackground} source={{ uri: anime.images.jpg.large_image_url }} />
+                    <LinearGradient
+                        colors={['transparent', 'rgba(23,23,23,0.8)','rgba(23,23,23, 1)']}
+                        style ={{width:windowWidth, height:windowHeight*0.55, position:'relative'}}
+                        start={{x:0.5, y:0}}
+                        end={{x:0.5, y:1}}
+                        
+                    />
+                    
                     
                    
                     <View 
-                    style={styles.card}
+                    style={styles.container}
                     >
                          <Text style = {styles.animeTitleText}> {anime.title_english} </Text>
                          
@@ -56,7 +64,7 @@ const AnimeInfoScreen = ({ route }) => {
                     </View>
                </ScrollView>
 
-                    </View>
+                  
            
         </View>
     );
@@ -76,8 +84,9 @@ const styles = StyleSheet.create({
     },
     imageBackground: {
         width: windowWidth,
-        height: windowHeight,
+        height: windowHeight*0.70,
         alignSelf: 'center',
+        position:'absolute'
     },
     card: {
         backgroundColor: "#111920",
@@ -86,6 +95,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderTopLeftRadius:"25%",
         borderTopRightRadius:"25%",
+        position:'absolute'
     },
     poster:{
         width: 200,
@@ -94,18 +104,10 @@ const styles = StyleSheet.create({
         transform:[{translateY:50}],
         zIndex:3
     },
-    blurOverlay: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        zIndex: 0,
-      },
-      blur: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-      },
+    container:
+    {
+        backgroundColor:'rgba(23,23,23, 1)'
+    }
 });
 
 export default AnimeInfoScreen;

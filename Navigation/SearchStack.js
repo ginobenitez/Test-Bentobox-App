@@ -35,8 +35,9 @@ export default function SearchStack() {
          <Stack.Screen 
         name="Info"
         component = {AnimeInfoScreen}
+        
         options = {{
-          headerShown:true,
+          headerShown:false,
           headerStyle:{
             backgroundColor:'#111920',
             headerTintColor: '#111920',
