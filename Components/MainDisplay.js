@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import TopAnimeBox from '../Components/TopAnimeBox';
 import CurrentSeason from '../Components/CurrentSeason';
 import StudioGhibliList from '../Components/StudioGhibliList';
-import NinetiesAnime from './ninetiesAnime';
+
 class MainDisplay extends PureComponent {
     constructor(props) {
         super(props);
