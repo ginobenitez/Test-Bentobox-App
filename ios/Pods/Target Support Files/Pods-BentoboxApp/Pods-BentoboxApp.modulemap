@@ -1,0 +1,6 @@
+module Pods_BentoboxApp {
+  umbrella header "Pods-BentoboxApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
