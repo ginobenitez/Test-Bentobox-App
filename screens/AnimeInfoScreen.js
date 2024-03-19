@@ -30,8 +30,8 @@ const AnimeInfoScreen = ({ route }) => {
                    
                     <Image style={styles.imageBackground} source={{ uri: anime.images.jpg.large_image_url }} />
                     <LinearGradient
-                        colors={['transparent', 'rgba(23,23,23,0.8)','rgba(23,23,23, 1)']}
-                        style ={{width:windowWidth, height:windowHeight*0.55, position:'relative'}}
+                        colors={['transparent', 'rgba(23,23,23,0.5)','rgba(23,23,23, 1)']}
+                        style ={{width:windowWidth, height:windowHeight*0.50, position:'relative'}}
                         start={{x:0.5, y:0}}
                         end={{x:0.5, y:1}}
                         
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     imageBackground: {
         width: windowWidth,
         height: windowHeight*0.70,
+        transform:[{translateY:-25}],
         alignSelf: 'center',
         position:'absolute'
     },
